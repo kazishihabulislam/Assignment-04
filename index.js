@@ -62,18 +62,14 @@ function calculateFinalScore(obj) {
 // 🚀Problem 05:  Predict Average Waiting Time code start is here!
 
 function waitingTime(waitingTimes, serialNumber) {
-    // Ensure the first input is an array and the second is a number
-    if (!Array.isArray(waitingTimes) || typeof serialNumber !== 'number') {
-        return "Invalid Input";
-    }
-    let totalTime = 0;
-    for (let time of waitingTimes) {
-        totalTime += time;
-    }
-    let peoplePassed = waitingTimes.length;
-    let avgTime = Math.round(totalTime / peoplePassed);
-    let peopleLeft = serialNumber - 1 - peoplePassed;
+    // Check if the first input is an array and second is a number
+    if (!Array.isArray(waitingTimes) || typeof serialNumber !== 'number') return "Invalid Input";
+    
+    const avgTime = Math.round(waitingTimes.reduce((sum, time) => sum + time, 0) / waitingTimes.length);
+    let peopleLeft = serialNumber - 1 - waitingTimes.length;
+    
+    // Return waiting time or 0 if no one is left
     return peopleLeft > 0 ? peopleLeft * avgTime : 0;
 }
 
-// 🚀Problem 05:  Predict Average Waiting Time code end is here!
+// 😎 Problem 05:  Predict Average Waiting Time code end is here!
